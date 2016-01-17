@@ -55,10 +55,11 @@ ROOT_URLCONF = 'heck_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'heck_site/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.core.context_processors.static',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -117,5 +118,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
+STATIC_ROOT = '/var/www/heck_site/static'
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+# Static filesdirs tells the static files finder where to look for
+# static files, lets see what happens when we turn it off....
+# Also, the part I appended to your urls found here
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+# ok, I hope that helps!
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
